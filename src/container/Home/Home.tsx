@@ -17,7 +17,7 @@ const HomeContainer = () => {
         <Input name="address" type="text" placeholder="Inserir endereço para ver preço" />
       </InputContainer>
       <IllustrationContainer>
-        <SvgIcon src={Illustration} width="400px" height="350px" />
+        <SvgIcon src={Illustration} width="600px" height="400px" />
       </IllustrationContainer>
     </Section>
   );

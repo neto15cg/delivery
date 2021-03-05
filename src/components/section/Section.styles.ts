@@ -1,4 +1,3 @@
-import { device } from '@utils/mediaQuerys';
 import styled from 'styled-components';
 
 export const StyledSection = styled.section`
@@ -16,13 +15,5 @@ export const SectionContent = styled.div`
   align-items: center;
   max-width: 1040px;
   width: 100%;
-  /* padding: 0 229px;
-
-  ${device.tablet} {
-    padding: 0 100px;
-  } */
-
-  ${device.mobile} {
-    padding: 0 20px;
-  }
+  padding: 0 20px;
 `;
