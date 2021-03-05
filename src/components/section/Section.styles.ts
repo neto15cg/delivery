@@ -13,7 +13,7 @@ export const SectionContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1040px;
+  max-width: 986px;
   width: 100%;
   padding: 0 20px;
 `;

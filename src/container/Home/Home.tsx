@@ -11,7 +11,7 @@ const HomeContainer = () => {
   return (
     <Section>
       <HomeTitle>
-        <strong>Bebidas geladas &nbsp;</strong> a <strong>&nbsp;preço &nbsp;</strong>&nbsp; de mercado na sua casa <strong>&nbsp;agora</strong>
+        <strong>Bebidas geladas</strong> a <strong>preço</strong> de mercado na sua casa <strong>agora</strong>
       </HomeTitle>
       <InputContainer>
         <Input name="address" type="text" placeholder="Inserir endereço para ver preço" />

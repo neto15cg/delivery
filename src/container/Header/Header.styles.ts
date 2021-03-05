@@ -14,6 +14,6 @@ export const HeaderContent = styled.div`
   justify-content: space-between;
   height: 100%;
   width: 100%;
-  max-width: 1040px;
+  max-width: 986px;
   padding: 0 20px;
 `;
