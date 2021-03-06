@@ -72,6 +72,8 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     contentBase: path.join(__dirname, 'public'),
+    port: 9999,
+    disableHostCheck: true,
   },
   plugins: [
     new Dotenv(),

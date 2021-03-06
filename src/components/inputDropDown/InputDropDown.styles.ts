@@ -98,7 +98,7 @@ export const DropDown = styled.div`
   position: absolute;
   width: 100%;
   margin-top: 4px;
-  height: 300px;
+  max-height: 300px;
   background-color: #fff;
   overflow-y: auto;
 `;

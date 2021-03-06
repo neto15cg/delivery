@@ -8,7 +8,8 @@
     "build": "webpack --mode production",
     "test": "jest",
     "lint": "eslint \"**/*.js\" \"**/*.ts\" \"**/*.tsx\"",
-    "lint:fix": "eslint \"**/*.js\" \"**/*.ts\" \"**/*.tsx\" --fix"
+    "lint:fix": "eslint \"**/*.js\" \"**/*.ts\" \"**/*.tsx\" --fix",
+    "proxy": "lcp --proxyUrl https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
   },
   "husky": {
     "hooks": {
@@ -24,8 +25,8 @@
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
     "react-images": "^1.1.7",
-    "react-router-dom": "^5.2.0",
-    "react-inlinesvg": "^2.2.2"
+    "react-inlinesvg": "^2.2.2",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
