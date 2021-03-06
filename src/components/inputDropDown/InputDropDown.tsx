@@ -51,7 +51,7 @@ const Input = (props: InputProps, ref) => {
           </InputLoadingContainer>
         )}
         {!loading && hasOptions && (
-          <ButtonClearContainer onClick={handleClear}>
+          <ButtonClearContainer onClick={handleClear} data-testid="input-btn-clear">
             <SvgIcon src={IconClose} width="24px" height="24px" fill="#F64E60" />
           </ButtonClearContainer>
         )}

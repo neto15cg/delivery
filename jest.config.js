@@ -16,7 +16,7 @@ module.exports = {
   coveragePathIgnorePatterns: ['<rootDir>/src/styles/', '<rootDir>/src/utils/', '<rootDir>/cypress'],
   moduleNameMapper: {
     '\\.(css|scss)$': '<rootDir>/__mocks__/styleMock.js',
-    '\\.(gif|ttf|eot|svg)$': '<rootDir>/__mocks__/fileMock.js',
+    '\\.(jpe?g|png|gif|webp|svg|mp4|webm|ogg|mp3|wav|flac|aac|woff2?|eot|ttf|otf)$': '<rootDir>/__mocks__/fileMock.js',
     '@utils(.*)$': '<rootDir>/src/utils/$1',
     '@styles(.*)$': '<rootDir>/src/styles/$1',
     '@components(.*)$': '<rootDir>/src/components/$1',

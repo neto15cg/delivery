@@ -26,7 +26,7 @@ describe('Input', () => {
   it('Should have label passed in props', () => {
     render(<InputDropDown value="input value" name="inputTest" type="text" label="Test label" testId="input" id="inputTestlabel" />);
 
-    expect(screen.getByRole('textbox', { name: /Test label/i }));
+    expect(screen.getByText(/Test label/i)).toBeInTheDocument();
   });
 
   it('Should render error text', () => {
@@ -54,5 +54,64 @@ describe('Input', () => {
 
     fireEvent.blur(input);
     expect(spy).toHaveBeenCalled();
+  });
+
+  it('should render drop down if has options', () => {
+    render(
+      <InputDropDown
+        name="inputTest"
+        testId="input"
+        type="text"
+        options={[
+          { label: 'Label 1', value: 'value 1' },
+          { label: 'Label 2', value: 'value 2' },
+        ]}
+      />,
+    );
+
+    expect(screen.getByText(/Label 1/i)).toBeInTheDocument();
+    expect(screen.getByText(/Label 2/i)).toBeInTheDocument();
+  });
+
+  it('should call onClickOption  if click dropDown option', () => {
+    const spyOption = buildSpy();
+    render(
+      <InputDropDown
+        name="inputTest"
+        testId="input"
+        type="text"
+        options={[
+          { label: 'Label 1', value: 'value 1' },
+          { label: 'Label 2', value: 'value 2' },
+        ]}
+        onClickOption={spyOption}
+      />,
+    );
+
+    userEvent.click(screen.getByText(/Label 1/i));
+    expect(spyOption).toHaveBeenCalledWith({ label: 'Label 1', value: 'value 1' });
+  });
+
+  it('should call onClear and onCahnge if has options', () => {
+    const spyOnChange = buildSpy();
+    const spyOnClear = buildSpy();
+    render(
+      <InputDropDown
+        onChange={spyOnChange}
+        onClear={spyOnClear}
+        name="inputTest"
+        testId="input"
+        type="text"
+        options={[
+          { label: 'Label 1', value: 'value 1' },
+          { label: 'Label 2', value: 'value 2' },
+        ]}
+      />,
+    );
+
+    userEvent.click(screen.getByTestId('input-btn-clear'));
+
+    expect(spyOnChange).toHaveBeenCalledTimes(1);
+    expect(spyOnClear).toHaveBeenCalledTimes(1);
   });
 });
