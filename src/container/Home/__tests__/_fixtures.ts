@@ -1,6 +1,4 @@
-import { proxyurl } from '@services/home';
-
-export const MockUrlLocationPredictions = `${proxyurl}https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Avenida Olívia&types=geocode&language=pt-bt&key=AIzaSyDj-0PwzEQbDNhkRwVxSVG1SerXrDPemjs`;
+export const MockUrlLocationPredictions = `https://frozen-badlands-79535.herokuapp.com/predictions?search=Avenida Olívia`;
 
 export const LocationsPredictionsMock = {
   predictions: [
@@ -29,7 +27,7 @@ export const LocationsPredictionsMock = {
   status: 'Ok',
 };
 
-export const MockUrlLocationDetail = `${proxyurl}https://maps.googleapis.com/maps/api/place/details/json?place_id=EklBdmVuaWRhIE9sw612aWEgRmxvcmVzIC0gVW5pdmVyc2lkYWRlLCBWaXTDs3JpYSBkYSBDb25xdWlzdGEgLSBCQSwgQnJhc2lsIi4qLAoUChIJ9xzVa_M6RgcRBWASVsMVKRgSFAoSCf8CeIiSOkYHEQ7DW4ZHmpu_&fields=name,geometry&key=AIzaSyDj-0PwzEQbDNhkRwVxSVG1SerXrDPemjs`;
+export const MockUrlLocationDetail = `https://frozen-badlands-79535.herokuapp.com/predictions/detail?id=EklBdmVuaWRhIE9sw612aWEgRmxvcmVzIC0gVW5pdmVyc2lkYWRlLCBWaXTDs3JpYSBkYSBDb25xdWlzdGEgLSBCQSwgQnJhc2lsIi4qLAoUChIJ9xzVa_M6RgcRBWASVsMVKRgSFAoSCf8CeIiSOkYHEQ7DW4ZHmpu_`;
 
 export const LocationDetailMock = {
   result: {

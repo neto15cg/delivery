@@ -5,6 +5,7 @@ import InputDropDown from '@components/inputDropDown/InputDropDown';
 import { InputDropDownOption } from '@components/inputDropDown/InputDropDown.types';
 import useDebounce from '@utils/useDebounce';
 import { getPlaceById, getPlacesPredicitons, PlaceDetailType, PredictionType } from '@services/home';
+import { useHistory } from 'react-router-dom';
 import { HomeTitle, IllustrationContainer, InputContainer } from './Home.styles';
 
 // @ts-ignore
@@ -17,6 +18,8 @@ const Home = () => {
   const [placeDetail, setPlaceDetail] = useState<PlaceDetailType | undefined>(undefined);
   const [loading, setLoading] = useState(false);
 
+  const history = useHistory();
+
   const handleGetPredictions = async (searchQuery: string) => {
     const places = await getPlacesPredicitons(searchQuery);
     setLocationsPredictions(places);
@@ -27,6 +30,8 @@ const Home = () => {
     const place = await getPlaceById(id);
     setLoading(false);
     setPlaceDetail(place);
+
+    history.push(`/products?lat=${place.geometry.location.lat}&lng=${place.geometry.location.lng}`);
   };
 
   const handleClickOptions = (option: InputDropDownOption) => {

@@ -17,7 +17,7 @@ const Products = () => {
   const [value, setValue] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('');
 
-  const handleChange = (e) => {
+  const handleChangeItemsCard = (e) => {
     setValue(e);
   };
 
@@ -53,7 +53,13 @@ const Products = () => {
         <ProductListContainer>
           {ProductListMock.data.poc.products.map((product) => (
             <ProductContainer key={product.id}>
-              <CardProduct value={0} description={product.title} srcImage={product?.images[0].url} productValue={product.productVariants[0].price} />
+              <CardProduct
+                onChange={handleChangeItemsCard}
+                value={0}
+                description={product.title}
+                srcImage={product?.images[0].url}
+                productValue={product.productVariants[0].price}
+              />
             </ProductContainer>
           ))}
         </ProductListContainer>
