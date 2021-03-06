@@ -1,14 +1,25 @@
 import '@testing-library/jest-dom';
 
 require('jest-fetch-mock').enableMocks();
-require('mutationobserver-shim');
 
 jest.mock('axios');
-jest.setTimeout(8000);
 
-// eslint-disable-next-line no-console
+declare let process: { on: (a: string, b: any) => void };
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
+jest.setTimeout(50000);
+
+process.on('unhandledRejection', (e: any) => {
+  // eslint-disable-next-line no-console
+  console.error('**** Unhandled rejection in promise: ');
+  // eslint-disable-next-line no-console
+  console.error(e);
+});
+
 const consoleError = console.error;
-// eslint-disable-next-line no-console
 console.error = jest.fn((...args) => {
   const [error] = args;
   const skipMessages = [

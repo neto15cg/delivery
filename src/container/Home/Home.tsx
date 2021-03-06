@@ -10,8 +10,8 @@ import { HomeTitle, IllustrationContainer, InputContainer } from './Home.styles'
 // @ts-ignore
 import Illustration from '../../../public/assets/images/illustration.svg';
 
-const HomeContainer = () => {
-  const [locationPredictions, setLocationsPredictions] = useState<PredictionType[]>([]);
+const Home = () => {
+  const [locationsPredictions, setLocationsPredictions] = useState<PredictionType[]>([]);
   const [placeDetail, setPlaceDetail] = useState<PlaceDetailType | undefined>(undefined);
   const [loading, setLoading] = useState(false);
 
@@ -31,38 +31,44 @@ const HomeContainer = () => {
     handleGetPlaceById(option.value);
   };
 
-  const [getPredictionsDebounced] = useDebounce(async (searchQuery: string) => {
+  const handleClearOptions = () => {
+    if (locationsPredictions.length > 0) {
+      setLocationsPredictions([]);
+    }
+  };
+
+  const [getLocationsPredictionsDebounce] = useDebounce(async (searchQuery: string) => {
     if (searchQuery.length > 3) {
       setLoading(true);
       await handleGetPredictions(searchQuery);
-      setLoading(false);
+      return setLoading(false);
     }
+    handleClearOptions();
   }, 400);
 
   const handleChangeSearch = (event: React.ChangeEvent<{ name?: string; value: string }>) => {
     const {
       target: { value },
     } = event;
-    getPredictionsDebounced(value);
+    getLocationsPredictionsDebounce(value);
   };
-
-  const handleClear = () => setLocationsPredictions([]);
 
   return (
     <Section>
-      <HomeTitle>
+      <HomeTitle data-testid="home-title">
         <strong>Bebidas geladas</strong> a <strong>preço</strong> de mercado na sua casa <strong>agora</strong>
       </HomeTitle>
       <InputContainer>
         <InputDropDown
+          testId="input-drop-down-home"
           loading={loading}
-          options={locationPredictions.map((location: PredictionType) => ({ label: location.description, value: location.place_id }))}
+          options={locationsPredictions.map((location: PredictionType) => ({ label: location.description, value: location.place_id }))}
           onClickOption={handleClickOptions}
           name="address"
           type="text"
           placeholder="Inserir endereço para ver preço"
           onChange={handleChangeSearch}
-          onClear={handleClear}
+          onClear={handleClearOptions}
         />
       </InputContainer>
       <IllustrationContainer>
@@ -72,4 +78,4 @@ const HomeContainer = () => {
   );
 };
 
-export default HomeContainer;
+export default Home;
