@@ -3,8 +3,15 @@ import CardProduct from '@components/cardProduct/CardProduct';
 import Section from '@components/section/Section';
 import InputDropDown from '@components/inputDropDown/InputDropDown';
 import ButtonCard from '@components/buttonCard/ButtonCard';
-import { CategoriesMock } from '@components/cardProduct/__tests__/fixtures';
-import { CategoriesButtonsContainer, CategoryContainer, InputSearchContainer, ProductsContainer } from './Pruducts.styles';
+import {
+  CategoriesButtonsContainer,
+  CategoryContainer,
+  InputSearchContainer,
+  ProductContainer,
+  ProductListContainer,
+  ProductsContainer,
+} from './Pruducts.styles';
+import { CategoriesMock, ProductListMock } from './__tests__/fixtures';
 
 const Products = () => {
   const [value, setValue] = useState(0);
@@ -43,8 +50,14 @@ const Products = () => {
             </CategoryContainer>
           ))}
         </CategoriesButtonsContainer>
+        <ProductListContainer>
+          {ProductListMock.data.poc.products.map((product) => (
+            <ProductContainer key={product.id}>
+              <CardProduct value={0} description={product.title} srcImage={product?.images[0].url} productValue={product.productVariants[0].price} />
+            </ProductContainer>
+          ))}
+        </ProductListContainer>
       </ProductsContainer>
-      {/* <CardProduct /> */}
     </Section>
   );
 };

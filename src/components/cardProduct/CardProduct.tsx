@@ -1,6 +1,7 @@
 import React from 'react';
 import IncrementInput from '@components/incrementInput/IncrementInput';
 import { CardContainer, CardContent, CardFooter, ImageContainer, InputContainer, InputContent, ValueContent } from './CardProduct.styles';
+import { currencyFormatterWithoutPrefix } from '@utils/currencyFormatHelper';
 
 const CardProduct = ({ onChange, srcImage, description, value, productValue }) => {
   return (
@@ -19,7 +20,7 @@ const CardProduct = ({ onChange, srcImage, description, value, productValue }) =
         </InputContainer>
         {productValue && (
           <ValueContent>
-            R$ &nbsp;<strong>{productValue}</strong>
+            R$ &nbsp;<strong>{currencyFormatterWithoutPrefix(productValue)}</strong>
           </ValueContent>
         )}
       </CardFooter>
