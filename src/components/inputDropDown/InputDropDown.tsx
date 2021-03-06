@@ -1,13 +1,27 @@
 import React, { forwardRef } from 'react';
 import SvgIcon from '../svgIcon/SvgIcon';
-import { BasicLoading, InputContainer, InputError, InputField, InputIconContainer, InputLoadingContainer, StyledInput, StyledLabel } from './Input.styles';
-import { InputProps } from './Input.types';
+import {
+  BasicLoading,
+  DropDown,
+  DropDownContainer,
+  InputContainer,
+  InputError,
+  InputField,
+  InputIconContainer,
+  InputLoadingContainer,
+  StyledInput,
+  StyledLabel,
+  StyledOption,
+} from './InputDropDown.styles';
+import { InputProps } from './InputDropDown.types';
 
 // @ts-ignore
 import MapMarker from '../../../public/assets/icons/map-marker.svg';
 
 const Input = (props: InputProps, ref) => {
-  const { label, error, id, testId, type, loading, ...otherProps } = props;
+  const { label, error, id, testId, type, loading, options, onClickOption, ...otherProps } = props;
+
+  const handleClickOption = (option) => () => onClickOption && onClickOption(option);
   return (
     <InputField>
       <StyledLabel htmlFor={id} error={error}>
@@ -24,6 +38,17 @@ const Input = (props: InputProps, ref) => {
           </InputLoadingContainer>
         )}
       </InputContainer>
+      {options && options.length > 0 && (
+        <DropDown>
+          <DropDownContainer>
+            {options.map((option) => (
+              <StyledOption onClick={handleClickOption(option)} key={option.value}>
+                {option.label}
+              </StyledOption>
+            ))}
+          </DropDownContainer>
+        </DropDown>
+      )}
       {error && <InputError>{error}</InputError>}
     </InputField>
   );

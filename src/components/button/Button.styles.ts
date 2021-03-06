@@ -13,7 +13,7 @@ export const StyledButton = styled.button`
   line-height: 20px;
   border: none;
   outline: none;
-  border-radius: 8px;
+  border-radius: 4px;
   cursor: pointer;
   transition: background 250ms, background-color 250ms ease-in-out;
   background-color: ${lighten(0.005, '#464646')};

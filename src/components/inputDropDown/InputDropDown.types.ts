@@ -1,3 +1,8 @@
+export interface InputDropDownOption {
+  label: string;
+  value: string;
+}
+
 export interface InputProps {
   type:
     | 'button'
@@ -36,4 +41,6 @@ export interface InputProps {
   className?: string;
   testId?: string;
   loading?: boolean;
+  options?: InputDropDownOption[];
+  onClickOption?: (option: InputDropDownOption) => void;
 }
