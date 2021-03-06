@@ -8,8 +8,7 @@
     "build": "webpack --mode production",
     "test": "TZ=America/SAO_Paulo NODE_ICU_DATA=node_modules/full-icu jest --ci -w=2",
     "lint": "eslint \"**/*.js\" \"**/*.ts\" \"**/*.tsx\"",
-    "lint:fix": "eslint \"**/*.js\" \"**/*.ts\" \"**/*.tsx\" --fix",
-    "proxy": "lcp --proxyUrl https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
+    "lint:fix": "eslint \"**/*.js\" \"**/*.ts\" \"**/*.tsx\" --fix"
   },
   "husky": {
     "hooks": {

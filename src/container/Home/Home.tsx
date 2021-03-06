@@ -9,6 +9,8 @@ import { HomeTitle, IllustrationContainer, InputContainer } from './Home.styles'
 
 // @ts-ignore
 import Illustration from '../../../public/assets/images/illustration.svg';
+// @ts-ignore
+import MapMarker from '../../../public/assets/icons/map-marker.svg';
 
 const Home = () => {
   const [locationsPredictions, setLocationsPredictions] = useState<PredictionType[]>([]);
@@ -69,6 +71,7 @@ const Home = () => {
           placeholder="Inserir endereço para ver preço"
           onChange={handleChangeSearch}
           onClear={handleClearOptions}
+          leftIcon={MapMarker}
         />
       </InputContainer>
       <IllustrationContainer>

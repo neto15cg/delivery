@@ -5,11 +5,11 @@ import Footer from '@container/Footer/Footer';
 
 const HomePage = () => {
   return (
-    <div>
+    <>
       <Header />
       <Home />
       <Footer />
-    </div>
+    </>
   );
 };
 
