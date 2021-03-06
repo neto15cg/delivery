@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import api from './api';
 
 export interface PredictionType {
   description: string;
@@ -14,10 +13,12 @@ export interface PlaceDetailType {
   name: string;
 }
 
+// I need this because my free server was block requests by cors
+export const proxyurl = 'https://cors-anywhere.herokuapp.com/';
 export const getPlacesPredicitons = async (find: string): Promise<PredictionType[]> => {
   try {
-    const response = await api().get(
-      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${find}&types=geocode&language=pt-bt&key=AIzaSyDj-0PwzEQbDNhkRwVxSVG1SerXrDPemjs`,
+    const response = await Axios.get(
+      `${proxyurl}https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${find}&types=geocode&language=pt-bt&key=AIzaSyDj-0PwzEQbDNhkRwVxSVG1SerXrDPemjs`,
     );
     const {
       data: { predictions },
@@ -30,8 +31,8 @@ export const getPlacesPredicitons = async (find: string): Promise<PredictionType
 
 export const getPlaceById = async (id: string): Promise<PlaceDetailType | undefined> => {
   try {
-    const response = await api().get(
-      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${id}&fields=name,geometry&key=AIzaSyDj-0PwzEQbDNhkRwVxSVG1SerXrDPemjs
+    const response = await Axios.get(
+      `${proxyurl}https://maps.googleapis.com/maps/api/place/details/json?place_id=${id}&fields=name,geometry&key=AIzaSyDj-0PwzEQbDNhkRwVxSVG1SerXrDPemjs
   `,
     );
     const {
