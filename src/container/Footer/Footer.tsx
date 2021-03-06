@@ -15,7 +15,7 @@ const Footer = () => {
         <StyledSvg src={Wave} />
         <SvgIcon src={DrinkFooter} width="60px" height="60px" />
         <Logo />
-        <Phrase>SE FOR BEBER DEIXA QUE A GENTE LEVA PARA VOCÊ, NÃO DIRIJA</Phrase>
+        <Phrase>SE FOR BEBER, DEIXA QUE A GENTE LEVA PARA VOCÊ, NÃO DIRIJA</Phrase>
       </FooterContent>
     </StyledFooter>
   );
