@@ -1,6 +1,6 @@
 import React from 'react';
-import { buildSpy, userEvent } from '../../../utils/testHelper';
 import { render, screen } from '@testing-library/react';
+import { buildSpy, userEvent } from '../../../utils/testHelper';
 import Button from '../Button';
 
 describe('Button', () => {

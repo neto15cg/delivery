@@ -1,62 +1,43 @@
 import React, { useState } from 'react';
-import Axios from 'axios';
 import Section from '@components/section/Section';
 import SvgIcon from '@components/svgIcon/SvgIcon';
 import InputDropDown from '@components/inputDropDown/InputDropDown';
 import { InputDropDownOption } from '@components/inputDropDown/InputDropDown.types';
 import useDebounce from '@utils/useDebounce';
+import { getPlaceById, getPlacesPredicitons, PlaceDetailType, PredictionType } from '@services/home';
 import { HomeTitle, IllustrationContainer, InputContainer } from './Home.styles';
 
 // @ts-ignore
 import Illustration from '../../../public/assets/images/illustration.svg';
 
 const HomeContainer = () => {
-  const [locationPredictions, setLocationsPredictions] = useState<any>([]);
-  const [locationDetail, setLocationDetail] = useState([]);
+  const [locationPredictions, setLocationsPredictions] = useState<PredictionType[]>([]);
+  const [placeDetail, setPlaceDetail] = useState<PlaceDetailType | undefined>(undefined);
   const [loading, setLoading] = useState(false);
 
-  const getPredictions = async (find: string) => {
-    try {
-      Axios.get(
-        `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${find}&types=geocode&language=pt-bt&key=AIzaSyDj-0PwzEQbDNhkRwVxSVG1SerXrDPemjs`,
-      ).then((response) => {
-        const {
-          data: { predictions },
-        } = response;
-        setLocationsPredictions(predictions);
-      });
-    } catch (e) {
-      setLocationsPredictions([]);
-    }
+  const handleGetPredictions = async (searchQuery: string) => {
+    const places = await getPlacesPredicitons(searchQuery);
+    setLocationsPredictions(places);
   };
 
-  const getPlaceById = async (id: string) => {
+  const handleGetPlaceById = async (id: string) => {
     setLoading(true);
-    try {
-      Axios.get(
-        `https://maps.googleapis.com/maps/api/place/details/json?place_id=${id}&fields=name,geometry&key=AIzaSyDj-0PwzEQbDNhkRwVxSVG1SerXrDPemjs
-  `,
-      ).then((response) => {
-        const {
-          data: { result },
-        } = response;
-        setLocationDetail(result);
-      });
-    } catch (e) {
-      setLocationDetail(undefined);
-    }
+    const place = await getPlaceById(id);
     setLoading(false);
+    setPlaceDetail(place);
   };
 
   const handleClickOptions = (option: InputDropDownOption) => {
-    getPlaceById(option.value);
+    handleGetPlaceById(option.value);
   };
 
-  const [getPredictionsDebounced] = useDebounce(async (searchQuery) => {
-    setLoading(true);
-    await getPredictions(searchQuery);
-    setLoading(false);
-  }, 500);
+  const [getPredictionsDebounced] = useDebounce(async (searchQuery: string) => {
+    if (searchQuery.length > 3) {
+      setLoading(true);
+      await handleGetPredictions(searchQuery);
+      setLoading(false);
+    }
+  }, 400);
 
   const handleChangeSearch = (event: React.ChangeEvent<{ name?: string; value: string }>) => {
     const {
@@ -65,7 +46,7 @@ const HomeContainer = () => {
     getPredictionsDebounced(value);
   };
 
-  console.log(locationDetail);
+  const handleClear = () => setLocationsPredictions([]);
 
   return (
     <Section>
@@ -75,12 +56,13 @@ const HomeContainer = () => {
       <InputContainer>
         <InputDropDown
           loading={loading}
-          options={locationPredictions.map((location) => ({ label: location.description, value: location.place_id }))}
+          options={locationPredictions.map((location: PredictionType) => ({ label: location.description, value: location.place_id }))}
           onClickOption={handleClickOptions}
           name="address"
           type="text"
           placeholder="Inserir endereço para ver preço"
           onChange={handleChangeSearch}
+          onClear={handleClear}
         />
       </InputContainer>
       <IllustrationContainer>

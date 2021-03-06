@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import SvgIcon from '../svgIcon/SvgIcon';
 import {
   BasicLoading,
+  ButtonClearContainer,
   DropDown,
   DropDownContainer,
   InputContainer,
@@ -13,15 +14,27 @@ import {
   StyledLabel,
   StyledOption,
 } from './InputDropDown.styles';
-import { InputProps } from './InputDropDown.types';
+import { InputDropDownOption, InputProps } from './InputDropDown.types';
 
 // @ts-ignore
 import MapMarker from '../../../public/assets/icons/map-marker.svg';
+// @ts-ignore
+import IconClose from '../../../public/assets/icons/times-circle.svg';
 
 const Input = (props: InputProps, ref) => {
-  const { label, error, id, testId, type, loading, options, onClickOption, ...otherProps } = props;
+  const { label, error, id, testId, type, loading, options, onClickOption, onChange, onClear, ...otherProps } = props;
 
-  const handleClickOption = (option) => () => onClickOption && onClickOption(option);
+  const handleClear = () => {
+    // @ts-ignore
+    document.getElementById('drop-down').value = '';
+    // @ts-ignore
+    onChange({ target: { value: '' } });
+    onClear([]);
+  };
+
+  const handleClickOption = (option: InputDropDownOption) => () => onClickOption && onClickOption(option);
+
+  const hasOptions = options && options.length > 0;
   return (
     <InputField>
       <StyledLabel htmlFor={id} error={error}>
@@ -31,18 +44,24 @@ const Input = (props: InputProps, ref) => {
         <InputIconContainer>
           <SvgIcon src={MapMarker} width="24px" height="24px" fill="#C0C9CB" />
         </InputIconContainer>
-        <StyledInput data-testid={testId} id={id} type={type ?? 'text'} ref={ref} error={error} {...otherProps} />
+        <StyledInput id="drop-down" onChange={onChange} ref={ref} data-testid={testId} type={type ?? 'text'} error={error} {...otherProps} />
         {loading && (
           <InputLoadingContainer>
             <BasicLoading />
           </InputLoadingContainer>
         )}
+        {!loading && hasOptions && (
+          <ButtonClearContainer onClick={handleClear}>
+            <SvgIcon src={IconClose} width="24px" height="24px" fill="#F64E60" />
+          </ButtonClearContainer>
+        )}
       </InputContainer>
-      {options && options.length > 0 && (
+      {hasOptions && (
         <DropDown>
           <DropDownContainer>
             {options.map((option) => (
               <StyledOption onClick={handleClickOption(option)} key={option.value}>
+                <SvgIcon src={MapMarker} width="24px" height="24px" fill="#C0C9CB" />
                 {option.label}
               </StyledOption>
             ))}

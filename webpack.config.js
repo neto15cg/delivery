@@ -66,7 +66,7 @@ module.exports = {
       '@container': path.join(__dirname, './src/container'),
       '@pages': path.join(__dirname, './src/pages'),
       '@routes': path.join(__dirname, './src/routes'),
-      '@services': path.join(__dirname, './services'),
+      '@services': path.join(__dirname, './src/services'),
     },
   },
   devServer: {

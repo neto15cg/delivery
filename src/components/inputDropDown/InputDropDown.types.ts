@@ -32,6 +32,7 @@ export interface InputProps {
   label?: string;
   value?: Date | string | number;
   onChange?: (event: React.ChangeEvent<{ name?: string; value: string }>) => void;
+  onClear?: (options: InputDropDownOption[]) => void;
   onInput?: (event: Event) => void;
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   autoComplete?: string;

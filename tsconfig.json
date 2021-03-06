@@ -20,8 +20,7 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "paths": {
-      "@*": ["./src/*"],
-      "@services*": ["./services/*"]
+      "@*": ["./src/*"]
     }
   },
   "include": ["./src/**/*"]

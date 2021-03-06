@@ -63,8 +63,8 @@ export const InputError = styled.span`
 
 export const InputLoadingContainer = styled.div`
   position: absolute;
-  top: 25px;
-  right: 20px;
+  top: 24px;
+  right: 26px;
 `;
 
 export const InputIconContainer = styled.div`
@@ -88,8 +88,8 @@ export const BasicLoading = styled.div`
   animation: ${spinnerBorder} 0.75s linear infinite;
   border-right-color: transparent;
   border-radius: 50%;
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
 `;
 
 export const DropDown = styled.div`
@@ -108,6 +108,8 @@ export const DropDownContainer = styled.div`
 `;
 
 export const StyledOption = styled.div`
+  display: flex;
+  align-items: center;
   padding: 10px 10px;
   cursor: pointer;
   transition: background-color 150ms ease;
@@ -117,5 +119,26 @@ export const StyledOption = styled.div`
   &:hover {
     background-color: #4747470d;
     border-radius: 4px;
+  }
+  svg {
+    margin-right: 8px;
+  }
+`;
+
+export const ButtonClearContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 18px;
+  width: 32px;
+  height: 32px;
+  right: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 200ms ease-out;
+
+  &:hover {
+    background-color: #47474726;
   }
 `;
