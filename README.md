@@ -1,6 +1,6 @@
 # Delivery Challenge
 
-- Access the application statement at the [link](https://delivery-challenge.netlify.app/)
+- Access the application statement at the [link](https://delivery-challenge.netlify.app/) or [link](https://delivery-three.vercel.app/)
 
 ## Description
 
