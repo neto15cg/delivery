@@ -2,8 +2,9 @@ import React from 'react';
 import IncrementInput from '@components/incrementInput/IncrementInput';
 import { currencyFormatterWithoutPrefix } from '@utils/currencyFormatHelper';
 import { CardContainer, CardContent, CardFooter, ImageContainer, InputContainer, InputContent, ValueContent } from './CardProduct.styles';
+import { CardProductProps } from './CardProduct.types';
 
-const CardProduct = ({ onChange, srcImage, description, value, productValue }) => {
+const CardProduct = ({ onChange, srcImage, description, value, productValue }: CardProductProps) => {
   return (
     <CardContainer>
       {srcImage && (
