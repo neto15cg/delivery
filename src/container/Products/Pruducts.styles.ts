@@ -49,4 +49,22 @@ export const EmptyContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ${device.mobile} {
+    padding-top: 40px;
+  }
+`;
+
+export const EmptyTitle = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 20px;
+  color: #474747;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+`;
+
+export const ContainerButton = styled.div`
+  max-width: 250px;
 `;

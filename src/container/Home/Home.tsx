@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Section from '@components/section/Section';
 import SvgIcon from '@components/svgIcon/SvgIcon';
 import InputDropDown from '@components/inputDropDown/InputDropDown';
 import { InputDropDownOption } from '@components/inputDropDown/InputDropDown.types';
 import useDebounce from '@utils/useDebounce';
-import { getPlaceById, getPlacesPredicitons, PlaceDetailType, PredictionType } from '@services/home';
-import { useHistory } from 'react-router-dom';
-import { DISTRIBUTORS_QUERY } from '@services/products';
-import format from 'date-fns/format';
-import { useLazyQuery } from '@apollo/client';
+import { getPlaceById, getPlacesPredicitons, PredictionType } from '@services/home';
+
 import { normalizeString } from '@utils/normalizeText';
 import { HomeTitle, IllustrationContainer, InputContainer } from './Home.styles';
 
@@ -19,9 +16,7 @@ import MapMarker from '../../../public/assets/icons/map-marker.svg';
 
 const Home = ({ onNavigate }) => {
   const [locationsPredictions, setLocationsPredictions] = useState<PredictionType[]>([]);
-  const [placeDetail, setPlaceDetail] = useState<PlaceDetailType | undefined>(undefined);
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
 
   const handleGetPredictions = async (searchQuery: string) => {
     const places = await getPlacesPredicitons(searchQuery);
@@ -32,7 +27,6 @@ const Home = ({ onNavigate }) => {
     setLoading(true);
     const place = await getPlaceById(id);
     setLoading(false);
-    setPlaceDetail(place);
     onNavigate({ lat: place.geometry.location.lat, lng: place.geometry.location.lng });
   };
 

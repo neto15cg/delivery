@@ -32,6 +32,8 @@ const ProductsPage = () => {
     setBagItems(icrementedBag);
   };
 
+  const handleGoBack = () => history.push('/');
+
   useEffect(() => {
     if (!lat || !long) {
       return history.push('/');
@@ -41,7 +43,7 @@ const ProductsPage = () => {
   return (
     <>
       <Header isProductList bagItems={bagItems} />
-      <Products onChangeItemCard={handleChangeItemBag} bagItems={bagItems} lat={lat} long={long} />
+      <Products onChangeItemCard={handleChangeItemBag} bagItems={bagItems} lat={lat} long={long} onGoBack={handleGoBack} />
       <Footer />
     </>
   );

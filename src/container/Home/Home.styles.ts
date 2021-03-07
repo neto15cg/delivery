@@ -11,12 +11,20 @@ export const HomeTitle = styled.h2`
   text-align: center;
   padding-top: 100px;
   padding-bottom: 40px;
+
+  ${device.mobile} {
+    padding-top: 0;
+  }
 `;
 
 export const InputContainer = styled.div`
   width: 100%;
   max-width: 650px;
   padding-bottom: 100px;
+
+  ${device.mobile} {
+    padding-bottom: 0;
+  }
 `;
 
 export const IllustrationContainer = styled.div`

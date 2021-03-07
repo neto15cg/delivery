@@ -3,9 +3,9 @@ import CardProduct from '@components/cardProduct/CardProduct';
 import Section from '@components/section/Section';
 import InputDropDown from '@components/inputDropDown/InputDropDown';
 import ButtonCard from '@components/buttonCard/ButtonCard';
-import { useHistory, useLocation } from 'react-router-dom';
 import { useLazyQuery, useQuery } from '@apollo/client';
 import { CATEGORIES_QUERY, DISTRIBUTORS_QUERY, PRODUCTS_QUERY } from '@services/products';
+import Button from '@components/button/Button';
 import BasicLoading from '@components/basicLoading/BasicLoading';
 import { format } from 'date-fns';
 import {
@@ -16,20 +16,23 @@ import {
   ProductContainer,
   ProductListContainer,
   ProductsContainer,
+  EmptyTitle,
+  ContainerButton,
 } from './Pruducts.styles';
 // @ts-ignore
 import SearchIcon from '../../../public/assets/icons/search.svg';
 
-const Products = ({ onChangeItemCard, bagItems, lat, long }) => {
+const Products = ({ onChangeItemCard, bagItems, lat, long, onGoBack }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
+  const { data: categories } = useQuery(CATEGORIES_QUERY);
+  const [getDistribuitors, { loading: loadingDistribuitors, data: distribuitors, error: errorDistribuitors }] = useLazyQuery(DISTRIBUTORS_QUERY);
+  const [getProducts, { loading: loadingProducts, data: products, error: errorProducts }] = useLazyQuery(PRODUCTS_QUERY);
+
   const handleChangeItemsCard = (item, value) => {
     onChangeItemCard(item, value);
   };
-  const { loading: loadingCategories, data: categories } = useQuery(CATEGORIES_QUERY);
-  const [getDistribuitors, { loading: loadingDistribuitors, data: distribuitors }] = useLazyQuery(DISTRIBUTORS_QUERY);
-  const [getProducts, { loading: loadingProducts, data: products }] = useLazyQuery(PRODUCTS_QUERY);
 
-  const handleChangeSearch = (e) => {};
+  const handleClearInput = () => {};
 
   const handleGetProducts = (id: string, search: string, categoryId: string | null) => {
     const queryVariables = {
@@ -38,6 +41,17 @@ const Products = ({ onChangeItemCard, bagItems, lat, long }) => {
       categoryId,
     };
     getProducts({ variables: queryVariables });
+  };
+
+  const handleChangeSearch = (e) => {
+    const firstDistribuitor = distribuitors?.pocSearch[0];
+    const {
+      target: { value },
+    } = e;
+    if (!value) {
+      return handleGetProducts(firstDistribuitor.id, value, selectedCategory || null);
+    }
+    handleGetProducts(firstDistribuitor.id, value, null);
   };
 
   const handleClickCategory = (id: string) => {
@@ -82,8 +96,28 @@ const Products = ({ onChangeItemCard, bagItems, lat, long }) => {
     );
   }
 
-  if (distribuitors?.pocSearch?.length === 0) {
-    return <Section>Não encontramos distribuidores na sua região</Section>;
+  const EmptyState = ({ children }) => {
+    return (
+      <EmptyTitle>
+        :( <br />
+        {children}
+        <br />
+        <br />
+        <ContainerButton>
+          <Button type="button" onClick={onGoBack}>
+            Buscar em outra região
+          </Button>
+        </ContainerButton>
+      </EmptyTitle>
+    );
+  };
+
+  if (distribuitors?.pocSearch?.length === 0 || errorDistribuitors) {
+    return (
+      <Section>
+        <EmptyState>Desculpe, não encontramos distribuidores na sua região</EmptyState>
+      </Section>
+    );
   }
 
   return (
@@ -99,6 +133,7 @@ const Products = ({ onChangeItemCard, bagItems, lat, long }) => {
             onChange={handleChangeSearch}
             leftIcon={SearchIcon}
             disabled={loadingDistribuitors}
+            onClear={handleClearInput}
           />
         </InputSearchContainer>
         <CategoriesButtonsContainer>
@@ -114,7 +149,11 @@ const Products = ({ onChangeItemCard, bagItems, lat, long }) => {
             <BasicLoading size={30} />
           </EmptyContainer>
         )}
-        {isEmptyProducts && <EmptyContainer>Não encontramos produtos </EmptyContainer>}
+        {isEmptyProducts && (
+          <EmptyContainer>
+            <EmptyState>Não foram encontrados produtos disponíveis</EmptyState>
+          </EmptyContainer>
+        )}
         <ProductListContainer>
           {products?.poc.products.map((product) => (
             <ProductContainer key={product.id}>
