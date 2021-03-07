@@ -1,4 +1,7 @@
+import { BagProductType } from '@container/Products/Products.types';
+
 export interface HeaderProps {
   isProductList?: boolean;
-  bagItems?: any[];
+  bagProducts?: BagProductType[];
+  onGoBack?: () => void;
 }

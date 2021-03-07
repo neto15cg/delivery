@@ -5,16 +5,15 @@ import InputDropDown from '@components/inputDropDown/InputDropDown';
 import { InputDropDownOption } from '@components/inputDropDown/InputDropDown.types';
 import useDebounce from '@utils/useDebounce';
 import { getPlaceById, getPlacesPredicitons, PredictionType } from '@services/home';
-
 import { normalizeString } from '@utils/normalizeText';
 import { HomeTitle, IllustrationContainer, InputContainer } from './Home.styles';
-
+import { HomeProps } from './Home.types';
 // @ts-ignore
 import Illustration from '../../../public/assets/images/illustration.svg';
 // @ts-ignore
 import MapMarker from '../../../public/assets/icons/map-marker.svg';
 
-const Home = ({ onNavigate }) => {
+const Home = ({ onNavigate }: HomeProps) => {
   const [locationsPredictions, setLocationsPredictions] = useState<PredictionType[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -27,12 +26,12 @@ const Home = ({ onNavigate }) => {
     setLoading(true);
     const place = await getPlaceById(id);
     setLoading(false);
-    onNavigate({ lat: place.geometry.location.lat, lng: place.geometry.location.lng });
+    if (onNavigate) {
+      onNavigate({ lat: place.geometry.location.lat, lng: place.geometry.location.lng });
+    }
   };
 
-  const handleClickOptions = (option: InputDropDownOption) => {
-    handleGetPlaceById(option.value);
-  };
+  const handleClickOptions = (option: InputDropDownOption) => handleGetPlaceById(option.value);
 
   const handleClearOptions = () => {
     if (locationsPredictions.length > 0) {

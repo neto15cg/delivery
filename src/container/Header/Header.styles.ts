@@ -50,3 +50,8 @@ export const ContainerBag = styled.div`
       }
     `}
 `;
+
+export const StyledIconHeader = styled.div`
+  min-width: 40px;
+  min-height: 40px;
+`;

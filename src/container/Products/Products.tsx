@@ -21,18 +21,17 @@ import {
 } from './Pruducts.styles';
 // @ts-ignore
 import SearchIcon from '../../../public/assets/icons/search.svg';
+import { ProductsProps, ProductType } from './Products.types';
 
-const Products = ({ onChangeItemCard, bagItems, lat, long, onGoBack }) => {
+const Products = ({ onChangeItemCard, bagProducts, lat, lng, onGoBack }: ProductsProps) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const { data: categories } = useQuery(CATEGORIES_QUERY);
   const [getDistribuitors, { loading: loadingDistribuitors, data: distribuitors, error: errorDistribuitors }] = useLazyQuery(DISTRIBUTORS_QUERY);
   const [getProducts, { loading: loadingProducts, data: products, error: errorProducts }] = useLazyQuery(PRODUCTS_QUERY);
 
-  const handleChangeItemsCard = (item, value) => {
-    onChangeItemCard(item, value);
+  const handleChangeItemsCard = (product: ProductType, value: number) => {
+    onChangeItemCard(product, value);
   };
-
-  const handleClearInput = () => {};
 
   const handleGetProducts = (id: string, search: string, categoryId: string | null) => {
     const queryVariables = {
@@ -69,7 +68,7 @@ const Products = ({ onChangeItemCard, bagItems, lat, long, onGoBack }) => {
     const queryVariables = {
       algorithm: 'NEAREST',
       lat,
-      long,
+      long: lng,
       now: `${format(new Date(), "yyyy-MM-dd'T'HH:mm:ss").toString()}.000Z`,
     };
     getDistribuitors({ variables: queryVariables });
@@ -82,7 +81,7 @@ const Products = ({ onChangeItemCard, bagItems, lat, long, onGoBack }) => {
     }
   }, [distribuitors]);
 
-  const isEmptyProducts = products?.poc.products.length === 0;
+  const isEmptyProducts = products?.poc.products.length === 0 || errorProducts;
 
   if (loadingDistribuitors) {
     return (
@@ -133,7 +132,6 @@ const Products = ({ onChangeItemCard, bagItems, lat, long, onGoBack }) => {
             onChange={handleChangeSearch}
             leftIcon={SearchIcon}
             disabled={loadingDistribuitors}
-            onClear={handleClearInput}
           />
         </InputSearchContainer>
         <CategoriesButtonsContainer>
@@ -159,7 +157,7 @@ const Products = ({ onChangeItemCard, bagItems, lat, long, onGoBack }) => {
             <ProductContainer key={product.id}>
               <CardProduct
                 onChange={(value) => handleChangeItemsCard(product, value)}
-                value={bagItems.find((item) => item.id === product.id)?.value || 0}
+                value={bagProducts.find((item) => item.id === product.id)?.value || 0}
                 description={product.title}
                 srcImage={product?.images[0].url}
                 productValue={product.productVariants[0].price}

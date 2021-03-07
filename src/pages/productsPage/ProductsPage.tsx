@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { getUrlParameter } from '@utils/urlParamterHelper';
 
 const ProductsPage = () => {
-  const [bagItems, setBagItems] = useState<any>([]);
+  const [bagProducts, setBagProducts] = useState<any>([]);
   const history = useHistory();
   const lat = getUrlParameter('lat');
   const long = getUrlParameter('lng');
@@ -16,11 +16,11 @@ const ProductsPage = () => {
       id: product.id,
       value,
     };
-    const bagItemFinded = bagItems.find((bagItem) => bagItem.id === product.id);
+    const bagItemFinded = bagProducts.find((bagItem) => bagItem.id === product.id);
     if (!bagItemFinded) {
-      return setBagItems([...bagItems, bag]);
+      return setBagProducts([...bagProducts, bag]);
     }
-    const icrementedBag = bagItems.map((bagItem) => {
+    const icrementedBag = bagProducts.map((bagItem) => {
       if (bagItem.id === product.id) {
         return {
           ...bagItem,
@@ -29,7 +29,7 @@ const ProductsPage = () => {
       }
       return { ...bagItem };
     });
-    setBagItems(icrementedBag);
+    setBagProducts(icrementedBag);
   };
 
   const handleGoBack = () => history.push('/');
@@ -42,8 +42,8 @@ const ProductsPage = () => {
 
   return (
     <>
-      <Header isProductList bagItems={bagItems} />
-      <Products onChangeItemCard={handleChangeItemBag} bagItems={bagItems} lat={lat} long={long} onGoBack={handleGoBack} />
+      <Header isProductList bagProducts={bagProducts} onGoBack={handleGoBack} />
+      <Products onChangeItemCard={handleChangeItemBag} bagProducts={bagProducts} lat={lat} lng={long} onGoBack={handleGoBack} />
       <Footer />
     </>
   );
