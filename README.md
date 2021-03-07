@@ -1,4 +1,4 @@
-# Challenge Login
+# Delivery Challenge
 
 - Access the application statement at the [link](https://delivery-challenge.netlify.app/)
 
