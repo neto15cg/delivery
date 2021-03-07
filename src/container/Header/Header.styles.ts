@@ -23,8 +23,11 @@ export const ContainerButtons = styled.div`
 
 export const ContainerBag = styled.div`
   position: relative;
-  margin-left: 8px;
+  margin-left: 12px;
   cursor: pointer;
+  min-width: 32px;
+  min-height: 32px;
+
   &:before {
     content: ${(props) => `'${props.items}'`};
     position: absolute;
@@ -39,6 +42,7 @@ export const ContainerBag = styled.div`
     font-family: 'Poppins', sans-serif;
     font-size: 10px;
     color: #ffffff;
-    font-weight: 500;
+    font-weight: bold;
+    padding: 2px;
   }
 `;

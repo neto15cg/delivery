@@ -11,12 +11,15 @@ import IconLogo from '../../../public/assets/icons/drink-header.svg';
 // @ts-ignore
 import IconBag from '../../../public/assets/icons/shopping-bag.svg';
 
-const Header = ({ isProductList }: HeaderProps) => {
+const Header = ({ isProductList, bagItems }: HeaderProps) => {
   const history = useHistory();
 
   const handleClick = () => {
     history.push('/');
   };
+
+  const bagLength = bagItems.length > 0 && bagItems.reduce((acc, obj) => acc + obj.value, 0);
+
   return (
     <StyledHeader>
       <HeaderContent>
@@ -25,7 +28,7 @@ const Header = ({ isProductList }: HeaderProps) => {
         <ContainerButtons>
           <Button type="button">Entrar</Button>
           {isProductList && (
-            <ContainerBag items={2}>
+            <ContainerBag items={bagLength || 0}>
               <SvgIcon src={IconBag} width="32px" height="32px" fill="#464646" />
             </ContainerBag>
           )}

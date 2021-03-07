@@ -18,12 +18,11 @@ import SearchIcon from '../../../public/assets/icons/search.svg';
 
 import { CategoriesMock, ProductListMock } from './__tests__/fixtures';
 
-const Products = () => {
-  const [value, setValue] = useState(0);
+const Products = ({ onChangeItemCard, bagItems }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const history = useHistory();
-  const handleChangeItemsCard = (e) => {
-    setValue(e);
+  const handleChangeItemsCard = (item, value) => {
+    onChangeItemCard(item, value);
   };
 
   const handleChangeSearch = (e) => {};
@@ -68,8 +67,8 @@ const Products = () => {
           {ProductListMock.data.poc.products.map((product) => (
             <ProductContainer key={product.id}>
               <CardProduct
-                onChange={handleChangeItemsCard}
-                value={0}
+                onChange={(value) => handleChangeItemsCard(product, value)}
+                value={bagItems.find((item) => item.id === product.id)?.value || 0}
                 description={product.title}
                 srcImage={product?.images[0].url}
                 productValue={product.productVariants[0].price}
