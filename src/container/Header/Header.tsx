@@ -18,7 +18,7 @@ const Header = ({ isProductList, bagItems }: HeaderProps) => {
     history.push('/');
   };
 
-  const bagLength = bagItems.length > 0 && bagItems.reduce((acc, obj) => acc + obj.value, 0);
+  const bagLength = bagItems && bagItems.length > 0 && bagItems.reduce((acc, obj) => acc + obj.value, 0);
 
   return (
     <StyledHeader>
