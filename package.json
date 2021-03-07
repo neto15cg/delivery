@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "npm install && NODE_ENV=development webpack-dev-server --open",
     "start": "NODE_ENV=development webpack-dev-server --open",
     "build": "webpack --mode production",
     "test": "TZ=America/SAO_Paulo NODE_ICU_DATA=node_modules/full-icu jest --ci",

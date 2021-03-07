@@ -1,7 +1,6 @@
 context('Products', () => {
   beforeEach(() => {
-    // cy.visit('https://delivery-challenge.netlify.app/products?lat=-23.6317641&lng=-46.7014641');
-    cy.visit('http://localhost:9999/products?lat=-23.6317641&lng=-46.7014641');
+    cy.visit('https://delivery-challenge.netlify.app/products?lat=-23.6317641&lng=-46.7014641');
   });
 
   it('https://delivery-challenge.netlify.app/products?lat=-23.6317641&lng=-46.7014641', () => {
