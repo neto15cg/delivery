@@ -43,3 +43,10 @@ export const ProductContainer = styled.div`
     margin: 40px 0 40px 50px;
   }
 `;
+
+export const EmptyContainer = styled.div`
+  padding-top: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

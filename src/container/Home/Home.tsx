@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Section from '@components/section/Section';
 import SvgIcon from '@components/svgIcon/SvgIcon';
 import InputDropDown from '@components/inputDropDown/InputDropDown';
@@ -6,6 +6,10 @@ import { InputDropDownOption } from '@components/inputDropDown/InputDropDown.typ
 import useDebounce from '@utils/useDebounce';
 import { getPlaceById, getPlacesPredicitons, PlaceDetailType, PredictionType } from '@services/home';
 import { useHistory } from 'react-router-dom';
+import { DISTRIBUTORS_QUERY } from '@services/products';
+import format from 'date-fns/format';
+import { useLazyQuery } from '@apollo/client';
+import { normalizeString } from '@utils/normalizeText';
 import { HomeTitle, IllustrationContainer, InputContainer } from './Home.styles';
 
 // @ts-ignore
@@ -13,11 +17,10 @@ import Illustration from '../../../public/assets/images/illustration.svg';
 // @ts-ignore
 import MapMarker from '../../../public/assets/icons/map-marker.svg';
 
-const Home = () => {
+const Home = ({ onNavigate }) => {
   const [locationsPredictions, setLocationsPredictions] = useState<PredictionType[]>([]);
   const [placeDetail, setPlaceDetail] = useState<PlaceDetailType | undefined>(undefined);
   const [loading, setLoading] = useState(false);
-
   const history = useHistory();
 
   const handleGetPredictions = async (searchQuery: string) => {
@@ -30,8 +33,7 @@ const Home = () => {
     const place = await getPlaceById(id);
     setLoading(false);
     setPlaceDetail(place);
-
-    history.push(`/products?lat=${place.geometry.location.lat}&lng=${place.geometry.location.lng}`);
+    onNavigate({ lat: place.geometry.location.lat, lng: place.geometry.location.lng });
   };
 
   const handleClickOptions = (option: InputDropDownOption) => {
@@ -57,7 +59,7 @@ const Home = () => {
     const {
       target: { value },
     } = event;
-    getLocationsPredictionsDebounce(value);
+    getLocationsPredictionsDebounce(normalizeString(value));
   };
 
   return (

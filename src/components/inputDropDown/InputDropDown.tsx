@@ -22,7 +22,7 @@ import MapMarker from '../../../public/assets/icons/map-marker.svg';
 import IconClose from '../../../public/assets/icons/times-circle.svg';
 
 const Input = (props: InputProps, ref) => {
-  const { label, error, id, testId, type, loading, options, onClickOption, onChange, onClear, leftIcon, ...otherProps } = props;
+  const { label, error, id, testId, type, loading, options, onClickOption, onChange, onClear, leftIcon, disabled, ...otherProps } = props;
 
   const handleClear = () => {
     // @ts-ignore
@@ -46,7 +46,16 @@ const Input = (props: InputProps, ref) => {
             <SvgIcon src={leftIcon} width="24px" height="24px" fill="#C0C9CB" />
           </InputIconContainer>
         )}
-        <StyledInput id="drop-down" onChange={onChange} ref={ref} data-testid={testId} type={type ?? 'text'} error={error} {...otherProps} />
+        <StyledInput
+          id="drop-down"
+          onChange={onChange}
+          ref={ref}
+          data-testid={testId}
+          type={type ?? 'text'}
+          disabled={disabled}
+          error={error}
+          {...otherProps}
+        />
         {loading && (
           <InputLoadingContainer>
             <BasicLoading />

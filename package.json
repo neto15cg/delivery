@@ -20,6 +20,10 @@
   "author": "Eliezer Marques",
   "license": "MIT",
   "dependencies": {
+    "@apollo/client": "^3.3.11",
+    "axios": "^0.21.1",
+    "date-fns": "^2.19.0",
+    "graphql": "^15.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",

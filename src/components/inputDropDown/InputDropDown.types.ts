@@ -45,4 +45,5 @@ export interface InputProps {
   options?: InputDropDownOption[];
   onClickOption?: (option: InputDropDownOption) => void;
   leftIcon?: any;
+  disabled?: boolean;
 }

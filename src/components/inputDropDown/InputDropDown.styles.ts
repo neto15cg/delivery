@@ -47,6 +47,13 @@ export const StyledInput = styled.input`
       box-sizing: border-box;
       border-radius: 8px;
     `}
+
+  ${(props) =>
+    props.disabled &&
+    css`
+      background-color: #f6f6f6;
+      cursor: not-allowed;
+    `}
 `;
 
 export const InputError = styled.span`
