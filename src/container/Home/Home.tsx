@@ -27,7 +27,7 @@ const Home = ({ onNavigate }: HomeProps) => {
     const place = await getPlaceById(id);
     setLoading(false);
     if (onNavigate) {
-      onNavigate({ lat: place.geometry.location.lat, lng: place.geometry.location.lng });
+      onNavigate({ lat: place?.geometry.location.lat, lng: place?.geometry.location.lng });
     }
   };
 

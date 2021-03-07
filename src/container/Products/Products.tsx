@@ -23,15 +23,15 @@ import {
 import SearchIcon from '../../../public/assets/icons/search.svg';
 import { ProductsProps, ProductType } from './Products.types';
 
-const Products = ({ onChangeItemCard, bagProducts, lat, lng, onGoBack }: ProductsProps) => {
+const Products = ({ onChangeProductCard, bagProducts, lat, lng, onGoBack }: ProductsProps) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const { data: categories } = useQuery(CATEGORIES_QUERY);
   const [getDistribuitors, { loading: loadingDistribuitors, data: distribuitors, error: errorDistribuitors }] = useLazyQuery(DISTRIBUTORS_QUERY);
   const [getProducts, { loading: loadingProducts, data: products, error: errorProducts }] = useLazyQuery(PRODUCTS_QUERY);
 
-  const handleChangeItemsCard = (product: ProductType, value: number) => {
-    onChangeItemCard(product, value);
-  };
+  console.log('prodcuts', products?.poc);
+
+  const handleChangeItemsCard = (product: ProductType, value: number) => onChangeProductCard(product, value);
 
   const handleGetProducts = (id: string, search: string, categoryId: string | null) => {
     const queryVariables = {
@@ -42,13 +42,13 @@ const Products = ({ onChangeItemCard, bagProducts, lat, lng, onGoBack }: Product
     getProducts({ variables: queryVariables });
   };
 
-  const handleChangeSearch = (e) => {
+  const handleChangeSearch = (event: React.ChangeEvent<{ name?: string; value: string }>) => {
     const firstDistribuitor = distribuitors?.pocSearch[0];
     const {
       target: { value },
-    } = e;
+    } = event;
     if (!value) {
-      return handleGetProducts(firstDistribuitor.id, value, selectedCategory || null);
+      return handleGetProducts(firstDistribuitor.id, value || '', selectedCategory || null);
     }
     handleGetProducts(firstDistribuitor.id, value, null);
   };

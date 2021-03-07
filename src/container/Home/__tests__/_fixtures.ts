@@ -1,4 +1,4 @@
-export const MockUrlLocationPredictions = `https://frozen-badlands-79535.herokuapp.com/predictions?search=Avenida Olívia`;
+export const MockUrlLocationPredictions = `https://frozen-badlands-79535.herokuapp.com/predictions?search=Avenida Olivia`;
 
 export const LocationsPredictionsMock = {
   predictions: [

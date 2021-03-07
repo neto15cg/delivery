@@ -1,8 +1,8 @@
 import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
-import { mockAxios, renderWithRoute, userEvent } from '@utils/testHelper';
+import { buildSpy, mockAxios, renderWithRoute, userEvent } from '@utils/testHelper';
 import Home from '../Home';
-import { LocationsPredictionsMock, MockUrlLocationDetail, MockUrlLocationPredictions } from './_fixtures';
+import { LocationDetailMock, LocationsPredictionsMock, MockUrlLocationDetail, MockUrlLocationPredictions } from './_fixtures';
 
 describe('HomeContainer', () => {
   it('should render HomeContainer', async () => {
@@ -30,7 +30,8 @@ describe('HomeContainer', () => {
     expect(screen.getByText(/Avenida Olívia Flores - Universidade, Vitória da Conquista - BA, Brasil/i)).toBeInTheDocument();
   });
 
-  it('should get locationDetail if click in an option', async () => {
+  it('should get locationDetail and call onNavigate if click in an option', async () => {
+    const onNavigateSpy = buildSpy();
     mockAxios.get.mockImplementation(async (url) => {
       if (url === MockUrlLocationPredictions) {
         return {
@@ -44,19 +45,20 @@ describe('HomeContainer', () => {
       if (url === MockUrlLocationDetail) {
         return {
           status: 200,
-          data: LocationsPredictionsMock,
+          data: LocationDetailMock,
           headers: {},
           config: {},
           statusText: 'ok',
         };
       }
     });
-    renderWithRoute(<Home />);
+    renderWithRoute(<Home onNavigate={onNavigateSpy} />);
 
     userEvent.type(screen.getByTestId('input-drop-down-home'), 'Avenida Olívia');
     await waitFor(() => expect(mockAxios.get).toHaveBeenCalledTimes(1));
     userEvent.click(screen.getByText(/Avenida Olívia Flores - Universidade, Vitória da Conquista - BA, Brasil/i));
     await waitFor(() => expect(mockAxios.get).toHaveBeenCalledTimes(2));
+    await waitFor(() => expect(onNavigateSpy).toHaveBeenCalledTimes(1));
   });
 
   it('should clear locations predictions if click in btn-clear', async () => {

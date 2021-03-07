@@ -43,7 +43,7 @@ const ProductsPage = () => {
   return (
     <>
       <Header isProductList bagProducts={bagProducts} onGoBack={handleGoBack} />
-      <Products onChangeItemCard={handleChangeItemBag} bagProducts={bagProducts} lat={lat} lng={long} onGoBack={handleGoBack} />
+      <Products onChangeProductCard={handleChangeItemBag} bagProducts={bagProducts} lat={lat} lng={long} onGoBack={handleGoBack} />
       <Footer />
     </>
   );

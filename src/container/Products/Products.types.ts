@@ -30,7 +30,7 @@ export interface ProductType {
 
 export interface ProductsProps {
   bagProducts: BagProductType[];
-  onChangeItemCard: (product: ProductType, value: number) => void;
+  onChangeProductCard: (product: ProductType, value: number) => void;
   lat: number | string;
   lng: number | string;
   onGoBack: () => void;

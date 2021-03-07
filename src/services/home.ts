@@ -16,7 +16,6 @@ export interface PlaceDetailType {
 export const getPlacesPredicitons = async (searchQuery: string): Promise<PredictionType[]> => {
   try {
     const response = await Axios.get(`https://frozen-badlands-79535.herokuapp.com/predictions?search=${searchQuery}`);
-
     const {
       data: { predictions },
     } = response;
