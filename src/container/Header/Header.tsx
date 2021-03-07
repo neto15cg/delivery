@@ -23,7 +23,9 @@ const Header = ({ isProductList, bagProducts, onGoBack }: HeaderProps) => {
           <SvgIcon src={IconLogo} width="40px" height="40px" />
         </StyledIconHeader>
         <ContainerButtons>
-          <Button type="button">Entrar</Button>
+          <Button testId="button-entrar" type="button">
+            Entrar
+          </Button>
           {isProductList && (
             <ContainerBag items={bagLength || 0}>
               <SvgIcon src={IconBag} width="32px" height="32px" fill="#464646" />

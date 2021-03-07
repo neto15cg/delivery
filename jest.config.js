@@ -10,10 +10,10 @@ module.exports = {
   },
   setupFilesAfterEnv: ['./jest.setup.ts'],
   testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
-  testPathIgnorePatterns: ['/node_modules/', '/src/styles/', '/cypress/'],
+  testPathIgnorePatterns: ['/node_modules/', '/cypress/'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   collectCoverage: true,
-  coveragePathIgnorePatterns: ['<rootDir>/src/styles/', '<rootDir>/src/utils/', '<rootDir>/cypress'],
+  coveragePathIgnorePatterns: ['<rootDir>/src/utils/', '<rootDir>/cypress'],
   moduleNameMapper: {
     '\\.(css|scss)$': '<rootDir>/__mocks__/styleMock.js',
     '\\.(jpe?g|png|gif|webp|svg|mp4|webm|ogg|mp3|wav|flac|aac|woff2?|eot|ttf|otf)$': '<rootDir>/__mocks__/fileMock.js',

@@ -3,4 +3,5 @@ export interface ButtonCardProps {
   onClick: (id: string) => void;
   isSelected: boolean;
   id: string;
+  testId?: string;
 }

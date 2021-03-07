@@ -29,8 +29,6 @@ const Products = ({ onChangeProductCard, bagProducts, lat, lng, onGoBack }: Prod
   const [getDistribuitors, { loading: loadingDistribuitors, data: distribuitors, error: errorDistribuitors }] = useLazyQuery(DISTRIBUTORS_QUERY);
   const [getProducts, { loading: loadingProducts, data: products, error: errorProducts }] = useLazyQuery(PRODUCTS_QUERY);
 
-  console.log('prodcuts', products?.poc);
-
   const handleChangeItemsCard = (product: ProductType, value: number) => onChangeProductCard(product, value);
 
   const handleGetProducts = (id: string, search: string, categoryId: string | null) => {
@@ -136,9 +134,15 @@ const Products = ({ onChangeProductCard, bagProducts, lat, lng, onGoBack }: Prod
         </InputSearchContainer>
         <CategoriesButtonsContainer>
           {categories &&
-            categories.allCategory.map((category) => (
+            categories.allCategory.map((category, i) => (
               <CategoryContainer key={category.id}>
-                <ButtonCard id={category.id} title={category.title} isSelected={category.id === selectedCategory} onClick={handleClickCategory} />
+                <ButtonCard
+                  testId={`button-card-${i}`}
+                  id={category.id}
+                  title={category.title}
+                  isSelected={category.id === selectedCategory}
+                  onClick={handleClickCategory}
+                />
               </CategoryContainer>
             ))}
         </CategoriesButtonsContainer>

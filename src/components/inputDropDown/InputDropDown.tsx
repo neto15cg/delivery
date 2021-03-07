@@ -68,10 +68,10 @@ const Input = (props: InputProps, ref) => {
         )}
       </InputContainer>
       {hasOptions && (
-        <DropDown>
+        <DropDown data-testid="drop-down-input">
           <DropDownContainer>
-            {options.map((option) => (
-              <StyledOption onClick={handleClickOption(option)} key={option.value}>
+            {options.map((option, i) => (
+              <StyledOption data-testid={`drop-down-item-${i}`} onClick={handleClickOption(option)} key={option.value}>
                 <SvgIcon src={MapMarker} width="24px" height="24px" fill="#C0C9CB" />
                 {option.label}
               </StyledOption>

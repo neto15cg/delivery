@@ -3,9 +3,9 @@ import { BasicLoading, ButtonContainerLoading, StyledButton } from './Button.sty
 import { ButtonProps } from './Button.types';
 
 const Button = (props: ButtonProps) => {
-  const { children, loading, disabled, ...otherProps } = props;
+  const { children, loading, disabled, testId, ...otherProps } = props;
   return (
-    <StyledButton disabled={loading || disabled} {...otherProps}>
+    <StyledButton disabled={loading || disabled} {...otherProps} data-testid={testId}>
       <span>{children}</span>
       {loading && (
         <ButtonContainerLoading>
