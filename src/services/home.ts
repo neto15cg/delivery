@@ -13,6 +13,12 @@ export interface PlaceDetailType {
   name: string;
 }
 
+/**
+ * EXPLANATION:
+ *
+ * I needed to create a proxy api, because google was block requests by cors
+ */
+
 export const getPlacesPredicitons = async (searchQuery: string): Promise<PredictionType[]> => {
   try {
     const response = await Axios.get(`https://frozen-badlands-79535.herokuapp.com/predictions?search=${searchQuery}`);

@@ -1,8 +1,6 @@
-import React, { lazy, Suspense, useEffect } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import { gql, useMutation, useQuery } from '@apollo/client';
-import { CATEGORIES_QUERY } from '@services/products';
 
 export const history = createBrowserHistory();
 

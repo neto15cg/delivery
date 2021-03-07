@@ -26,7 +26,7 @@ const Home = ({ onNavigate }: HomeProps) => {
     setLoading(true);
     const place = await getPlaceById(id);
     setLoading(false);
-    if (onNavigate) {
+    if (onNavigate && place) {
       onNavigate({ lat: place?.geometry.location.lat, lng: place?.geometry.location.lng });
     }
   };
@@ -39,6 +39,10 @@ const Home = ({ onNavigate }: HomeProps) => {
     }
   };
 
+  /**
+   * Debounce was used for create a delay between user digitation and request
+   * It's necessary for prevent unnecessary request
+   */
   const [getLocationsPredictionsDebounce] = useDebounce(async (searchQuery: string) => {
     if (searchQuery.length > 3) {
       setLoading(true);

@@ -6,23 +6,24 @@
 
 The challenge is to create a delivery aplication using ReactJs with the following technologies:
 
-- Typescript
 - React
-- Hooks
+- Typescript
 - Styled Components
+- Apollo GraphQL
 - Axios
-- GraphQl
 - Google APIS
 
 # Setup
 
-## Installation
-
-Install all the packages:
+## Install and Running
 
 ```bash
  yarn dev or npm run dev
 ```
+
+## Installation
+
+Install all the packages:
 
 ```bash
 yarn install or npm install
@@ -31,7 +32,7 @@ yarn install or npm install
 ## Running the application
 
 ```bash
-yarn start or npm run start
+yarn start or npm start
 ```
 
 ## Build
@@ -46,18 +47,20 @@ yarn build or npm run build
 yarn test or npm run test
 ```
 
-# E2E tests
+## E2E tests
 
 ```bash
 yarn test:cypress or npm run test:cypress
 ```
 
-# E2E in graphic mode
+## E2E in graphic mode
 
 ```bash
 yarn test:cypress-open or npm run test:cypress-open
 ```
 
-## License
+## Running all tests
 
-[MIT](https://choosealicense.com/licenses/mit/)
+```bash
+ yarn test:all or npm run test:all
+```
