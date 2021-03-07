@@ -37,4 +37,9 @@ export const ProductListContainer = styled.div`
 
 export const ProductContainer = styled.div`
   margin: 40px;
+
+  ${device.mobile} {
+    width: 100%;
+    margin: 40px 0 40px 50px;
+  }
 `;

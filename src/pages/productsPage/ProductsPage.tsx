@@ -6,7 +6,7 @@ import Products from '@container/Products/Products';
 const ProductsPage = () => {
   return (
     <>
-      <Header />
+      <Header isProductList />
       <Products />
       <Footer />
     </>

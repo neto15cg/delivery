@@ -1,3 +1,4 @@
+import { device } from '@utils/mediaQuerys';
 import styled from 'styled-components';
 
 export const ImageContainer = styled.div`
@@ -20,6 +21,10 @@ export const CardContainer = styled.div`
     ${ImageContainer} {
       transform: rotate(0deg);
     }
+  }
+
+  ${device.mobile} {
+    width: 100%;
   }
 `;
 
@@ -45,6 +50,10 @@ export const InputContainer = styled.div`
   width: calc(210px - 110px);
   display: flex;
   align-items: center;
+
+  ${device.mobile} {
+    width: calc(100% - 120px);
+  }
 `;
 
 export const InputContent = styled.div`
@@ -64,5 +73,8 @@ export const ValueContent = styled.div`
   font-size: 12px;
   strong {
     font-size: 16px;
+  }
+  ${device.mobile} {
+    width: 120px;
   }
 `;

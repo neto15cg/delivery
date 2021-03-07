@@ -15,4 +15,10 @@ export const StyledLogo = styled.h1`
         display: none;
       }
     `}
+
+  ${(props) =>
+    props.onClick &&
+    css`
+      cursor: pointer;
+    `}
 `;

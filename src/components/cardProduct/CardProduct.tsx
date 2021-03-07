@@ -1,7 +1,7 @@
 import React from 'react';
 import IncrementInput from '@components/incrementInput/IncrementInput';
-import { CardContainer, CardContent, CardFooter, ImageContainer, InputContainer, InputContent, ValueContent } from './CardProduct.styles';
 import { currencyFormatterWithoutPrefix } from '@utils/currencyFormatHelper';
+import { CardContainer, CardContent, CardFooter, ImageContainer, InputContainer, InputContent, ValueContent } from './CardProduct.styles';
 
 const CardProduct = ({ onChange, srcImage, description, value, productValue }) => {
   return (
