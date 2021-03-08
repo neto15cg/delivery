@@ -48,7 +48,7 @@ export const IncrementValue = styled.div`
   font-family: 'Poppins', sans-serif;
 `;
 
-export const StyledFabButton = styled.button`
+export const StyledFabButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

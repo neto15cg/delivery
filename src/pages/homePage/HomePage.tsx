@@ -1,7 +1,7 @@
 import React from 'react';
-import Home from '@container/Home/Home';
-import Header from '@container/Header/Header';
-import Footer from '@container/Footer/Footer';
+import Home from '@containers/Home/Home';
+import Header from '@containers/Header/Header';
+import Footer from '@containers/Footer/Footer';
 import { useHistory } from 'react-router-dom';
 
 const HomePage = () => {

@@ -1,33 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import Footer from '@container/Footer/Footer';
-import Header from '@container/Header/Header';
-import Products from '@container/Products/Products';
-import { useHistory } from 'react-router-dom';
+import Footer from '@containers/Footer/Footer';
+import Header from '@containers/Header/Header';
+import Products from '@containers/Products/Products';
+import { useHistory, useLocation } from 'react-router-dom';
 import { getUrlParameter } from '@utils/urlParamterHelper';
+import { BagProductType, ProductType } from '@containers/Products/Products.types';
 
 const ProductsPage = () => {
-  const [bagProducts, setBagProducts] = useState<any>([]);
+  const [bagProducts, setBagProducts] = useState<BagProductType[]>([]);
   const history = useHistory();
-  const lat = getUrlParameter('lat');
-  const long = getUrlParameter('lng');
+  const { search } = useLocation();
+  const lat = getUrlParameter('lat', search);
+  const long = getUrlParameter('lng', search);
 
-  const handleChangeItemBag = (product, value) => {
+  const handleChangeProductBag = (product: ProductType, value: number) => {
     const bag = {
       id: product.id,
       value,
     };
-    const bagItemFinded = bagProducts.find((bagItem) => bagItem.id === product.id);
-    if (!bagItemFinded) {
+    const bagProductFinded = bagProducts.find((bagProduct) => bagProduct.id === product.id);
+    if (!bagProductFinded) {
       return setBagProducts([...bagProducts, bag]);
     }
-    const icrementedBag = bagProducts.map((bagItem) => {
-      if (bagItem.id === product.id) {
+    const icrementedBag = bagProducts.map((bagProduct) => {
+      if (bagProduct.id === product.id) {
         return {
-          ...bagItem,
+          ...bagProduct,
           value,
         };
       }
-      return { ...bagItem };
+      return { ...bagProduct };
     });
     setBagProducts(icrementedBag);
   };
@@ -43,7 +45,7 @@ const ProductsPage = () => {
   return (
     <>
       <Header isProductList bagProducts={bagProducts} onGoBack={handleGoBack} />
-      <Products onChangeProductCard={handleChangeItemBag} bagProducts={bagProducts} lat={lat} lng={long} onGoBack={handleGoBack} />
+      <Products onChangeProductCard={handleChangeProductBag} bagProducts={bagProducts} lat={lat} lng={long} onGoBack={handleGoBack} />
       <Footer />
     </>
   );

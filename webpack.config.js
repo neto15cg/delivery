@@ -63,7 +63,7 @@ module.exports = {
       '@utils': path.join(__dirname, './src/utils'),
       '@styles': path.join(__dirname, './src/styles'),
       '@components': path.join(__dirname, './src/components'),
-      '@container': path.join(__dirname, './src/container'),
+      '@containers': path.join(__dirname, './src/containers'),
       '@pages': path.join(__dirname, './src/pages'),
       '@routes': path.join(__dirname, './src/routes'),
       '@services': path.join(__dirname, './src/services'),

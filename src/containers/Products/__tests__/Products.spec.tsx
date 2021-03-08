@@ -1,8 +1,7 @@
 import React from 'react';
-
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, waitFor } from '@testing-library/react';
-import { buildSpy, ensureRender, noop, userEvent } from '@utils/testHelper';
+import { buildSpy, noop, userEvent } from '@utils/testHelper';
 import { CATEGORIES_QUERY, DISTRIBUTORS_QUERY, PRODUCTS_QUERY } from '@services/products';
 import { format } from 'date-fns';
 import Products from '../Products';
@@ -46,7 +45,7 @@ describe('ProductsContainer', () => {
     ];
     render(
       <MockedProvider mocks={mockGql} addTypename={false}>
-        <Products onChangeProductCard={noop} bagProducts={[]} lat="123" lng="123" onGoBack={noop} />
+        <Products onChangeProductCard={noop} bagProducts={[{ id: '8868', value: 2 }]} lat="123" lng="123" onGoBack={noop} />
       </MockedProvider>,
     );
 
@@ -95,7 +94,7 @@ describe('ProductsContainer', () => {
     await waitFor(() => expect(screen.getByText(/Skol 269ml - Unidade/i)));
 
     userEvent.click(screen.queryAllByTestId(/increment-button/i)[0]);
-    expect(spyonChangeProductCard).toBeCalledTimes(1);
+    await waitFor(() => expect(spyonChangeProductCard).toBeCalledTimes(1));
   });
 
   it('should search products if type input search', async () => {
@@ -213,5 +212,15 @@ describe('ProductsContainer', () => {
     await waitFor(() => expect(screen.queryAllByText(/Skol 269ml - Unidade/i)).toHaveLength(0));
 
     userEvent.click(screen.getByText(/Vinhos$/));
+  });
+
+  it("should render 'Desculpe, não encontramos distribuidores na sua região' if not exists distribuitors", async () => {
+    render(
+      <MockedProvider mocks={[]} addTypename={false}>
+        <Products onChangeProductCard={noop} bagProducts={[]} lat="123" lng="123" onGoBack={noop} />
+      </MockedProvider>,
+    );
+
+    await waitFor(() => expect(screen.getByText(/Desculpe, não encontramos distribuidores na sua região/i)));
   });
 });
