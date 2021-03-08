@@ -79,20 +79,6 @@ const Products = ({ onChangeProductCard, bagProducts, lat, lng, onGoBack }: Prod
     }
   }, [distribuitors]);
 
-  const isEmptyProducts = products?.poc.products.length === 0 || errorProducts;
-
-  if (loadingDistribuitors) {
-    return (
-      <Section>
-        <ProductsContainer>
-          <EmptyContainer>
-            <BasicLoading size={30} />
-          </EmptyContainer>
-        </ProductsContainer>
-      </Section>
-    );
-  }
-
   const EmptyState = ({ children }) => {
     return (
       <EmptyTitle>
@@ -108,6 +94,20 @@ const Products = ({ onChangeProductCard, bagProducts, lat, lng, onGoBack }: Prod
       </EmptyTitle>
     );
   };
+
+  const isEmptyProducts = products?.poc.products.length === 0 || errorProducts;
+
+  if (loadingDistribuitors) {
+    return (
+      <Section>
+        <ProductsContainer>
+          <EmptyContainer>
+            <BasicLoading size={30} />
+          </EmptyContainer>
+        </ProductsContainer>
+      </Section>
+    );
+  }
 
   if (distribuitors?.pocSearch?.length === 0 || errorDistribuitors) {
     return (
