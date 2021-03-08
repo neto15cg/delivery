@@ -34,17 +34,17 @@ const IncrementInput = (props: IncrementInputProps, ref) => {
   return (
     <div className={className} data-testid={testId}>
       <InputContainer>
-        <StartIconContainer type="button">
+        <StartIconContainer>
           <StyledFabButton backgroundColor="#F64E60" data-testid="decrement-button" disabled={value === minValue} onClick={handleDecrement()}>
-            <SvgIcon src={IconMinus} width="9px" height="9px" fill="#fff" />
+            <SvgIcon src={IconMinus} width="11px" height="11px" fill="#fff" />
           </StyledFabButton>
         </StartIconContainer>
         <IncrementContent>
           <IncrementValue>{value}</IncrementValue>
         </IncrementContent>
-        <EndIconContainer type="button" onClick={handleIncrement}>
+        <EndIconContainer onClick={handleIncrement}>
           <StyledFabButton backgroundColor="#0BB7AF" data-testid="increment-button" disabled={value === maxValue} onClick={handleIncrement()}>
-            <SvgIcon src={IconPlus} width="9px" height="9px" fill="#fff" />
+            <SvgIcon src={IconPlus} width="11px" height="11px" fill="#fff" />
           </StyledFabButton>
         </EndIconContainer>
       </InputContainer>

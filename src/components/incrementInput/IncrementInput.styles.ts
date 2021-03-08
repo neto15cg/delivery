@@ -48,15 +48,17 @@ export const IncrementValue = styled.div`
   font-family: 'Poppins', sans-serif;
 `;
 
-export const StyledFabButton = styled.div`
+export const StyledFabButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   background-color: ${(props) => props.backgroundColor};
   border-radius: 50%;
   cursor: pointer;
+  border: none;
+  outline: none;
 
   div {
     svg {

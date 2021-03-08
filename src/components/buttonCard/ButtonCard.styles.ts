@@ -10,7 +10,7 @@ export const StyledButtonCard = styled.div`
   color: 464646;
   font-size: 12px;
   background-color: #fff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   transition: background-color 150ms ease;
   border-radius: 4px;
   cursor: pointer;
