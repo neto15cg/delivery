@@ -12,7 +12,7 @@ context('Home', () => {
     cy.get('[data-testid=input-drop-down-home]').type('Rua Américo Brasiliense, São Paulo').should('have.value', 'Rua Américo Brasiliense, São Paulo');
     cy.wait('@predictions');
 
-    cy.get('[data-testid=drop-down-item-0').click();
+    cy.get('[data-testid=drop-down-item-0]').click();
     cy.contains('Cervejas');
     cy.contains('Destilados');
     cy.contains('Vinhos');
