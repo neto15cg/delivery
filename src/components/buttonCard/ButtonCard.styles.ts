@@ -1,7 +1,7 @@
 import { device } from '@utils/mediaQuerys';
 import styled, { css } from 'styled-components';
 
-export const StyledButtonCard = styled.div`
+export const StyledButtonCard = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,6 +16,8 @@ export const StyledButtonCard = styled.div`
   cursor: pointer;
   font-weight: 500;
   font-family: 'Poppins', sans-serif;
+  border: none;
+  outline: none;
 
   ${(props) =>
     props.isSelected &&
