@@ -1,6 +1,6 @@
 {
   "chromeWebSecurity": false,
-  "viewportWidth": 1440,
-  "viewportHeight": 720,
+  "viewportWidth": 1080,
+  "viewportHeight": 540,
   "video": false
 }
